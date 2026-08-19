@@ -1,24 +1,40 @@
 import { createFileRoute } from "@tanstack/react-router";
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
+import { PageLayout } from "@/components/layout/PageLayout";
+import { Hero } from "@/components/home/Hero";
+import { HowItWorks } from "@/components/home/HowItWorks";
+import { RoleFeatures } from "@/components/home/RoleFeatures";
+import { FeaturedEvents } from "@/components/home/FeaturedEvents";
+import { CallToAction } from "@/components/home/CallToAction";
+
 export const Route = createFileRoute("/")({
+  head: () => ({
+    meta: [
+      { title: "CrewUp – Volunteer Management & Community Event Platform" },
+      {
+        name: "description",
+        content:
+          "CrewUp connects volunteers with verified NGOs, student clubs and community organizers. Discover events, track hours and earn digital certificates.",
+      },
+      { property: "og:title", content: "CrewUp – Volunteer Management & Community Event Platform" },
+      {
+        property: "og:description",
+        content:
+          "Discover volunteer opportunities by interest, location and availability. Track verified hours and build a volunteer portfolio.",
+      },
+    ],
+  }),
   component: Index,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
 function Index() {
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
-    </div>
+    <PageLayout>
+      <Hero />
+      <HowItWorks />
+      <RoleFeatures />
+      <FeaturedEvents />
+      <CallToAction />
+    </PageLayout>
   );
 }
